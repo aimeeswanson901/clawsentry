@@ -11,6 +11,9 @@ Security + observability plugin for **OpenClaw** with scans, policy rules, and m
 - Telemetry: tool usage logs, anomaly detection
 - Optional monitors: process + network
 
+## Screenshot
+![ClawSentry dashboard overview](assets/dashboard-overview.jpg)
+
 ## Use Cases
 - **Audit agent behavior** during tool calls and detect risky patterns
 - **Pre‑install checks** for skills before enabling them
