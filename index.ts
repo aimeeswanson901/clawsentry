@@ -608,7 +608,8 @@ export default function register(api: OpenClawPluginApi) {
       const res = await fetch('/clawsentry/logs' + (qs ? '?' + qs : ''));
       const data = await res.json();
       lastData = data;
-      currentPage = 1;
+      const maxPage = Math.max(1, Math.ceil(data.length / pageSize));
+      if (currentPage > maxPage) currentPage = maxPage;
       renderPage(data);
 
       const alerts = data.filter(r => (r.severity === 'high' || r.severity === 'critical')).slice(0, 10);
@@ -699,7 +700,7 @@ export default function register(api: OpenClawPluginApi) {
       const bucketMs = 5 * 60 * 1000;
       const series = new Array(buckets).fill(0).map(() => ({ high:0, medium:0, low:0 }));
       data.forEach(r => {
-        const ts = Date.parse(r.ts || '');
+        const ts = (typeof r.ts === 'number') ? r.ts : Date.parse(String(r.ts || ''));
         if (!Number.isFinite(ts)) return;
         const age = now - ts;
         if (age < 0 || age > buckets * bucketMs) return;
