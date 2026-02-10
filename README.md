@@ -1,21 +1,28 @@
 # ClawSentry
 
-Security + observability plugin for **OpenClaw** with a terminal‑style UI, scans, policy rules, and monitoring.
+Security + observability plugin for **OpenClaw** with scans, policy rules, and monitoring.
 
 ## Features
 - Observe‑only by default (blocking only when explicitly enabled)
-- Terminal‑style web UI (mobile‑friendly, multi‑page)
+- Web UI (mobile‑friendly, multi‑page)
 - Scans: pre‑install skill, workspace skill, full system scan
 - Alerts (UI‑only): high/critical findings table
 - Policy engine: deny/allow tools and findings, optional enforcement
 - Telemetry: tool usage logs, anomaly detection
 - Optional monitors: process + network
 
+## Use Cases
+- **Audit agent behavior** during tool calls and detect risky patterns
+- **Pre‑install checks** for skills before enabling them
+- **Continuous visibility** into execution anomalies and large payloads
+- **Policy dry‑runs** before enabling enforcement
+- **Incident review** via stored logs and scan results
+
 ## Install
 Copy the plugin to your OpenClaw extensions folder:
 
 ```bash
-cp -R . ./~/.openclaw/extensions/clawsentry
+cp -R . ~/.openclaw/extensions/clawsentry
 ```
 
 Enable in `openclaw.json`:
@@ -57,7 +64,7 @@ http://localhost:3000/clawsentry
 ```
 index.ts
 openclaw.plugin.json
-src/skillfence.ts
+src/clawsentry.ts
 ```
 
 ## Notes

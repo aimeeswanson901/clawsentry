@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import { exec } from "node:child_process";
-import { createSkillFence } from "./src/skillfence";
+import { createSkillFence } from "./src/clawsentry";
 
 export default function register(api: OpenClawPluginApi) {
   const fence = createSkillFence(api);
