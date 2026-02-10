@@ -1,0 +1,78 @@
+{
+  "id": "clawsentry",
+  "name": "ClawSentry",
+  "version": "0.1.0",
+  "description": "Security + observability monitor for OpenClaw skills/tools.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "logDir": {
+        "type": "string",
+        "description": "Directory to store JSONL logs"
+      },
+      "redact": {
+        "type": "boolean",
+        "description": "Redact secrets/PII in payloads",
+        "default": true
+      },
+      "maxPayloadBytes": {
+        "type": "integer",
+        "description": "Max payload size before truncation",
+        "default": 4096,
+        "minimum": 256
+      },
+      "policy": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "denyTools": { "type": "array", "items": { "type": "string" } },
+          "allowTools": { "type": "array", "items": { "type": "string" } },
+          "denyFindings": { "type": "array", "items": { "type": "string" } },
+          "enforce": { "type": "boolean", "default": false }
+        }
+      },
+      "processMonitor": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": false },
+          "intervalSec": { "type": "integer", "default": 60, "minimum": 10 }
+        }
+      },
+      "networkMonitor": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": false },
+          "intervalSec": { "type": "integer", "default": 60, "minimum": 10 }
+        }
+      },
+      "anomaly": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": true },
+          "largePayloadBytes": { "type": "integer", "default": 20000, "minimum": 1000 }
+        }
+      },
+      "alerts": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": true }
+        }
+      }
+    }
+  },
+  "uiHints": {
+    "logDir": { "label": "Log directory", "placeholder": "~/.openclaw/clawsentry/logs" },
+    "redact": { "label": "Redact sensitive values" },
+    "maxPayloadBytes": { "label": "Max payload bytes" },
+    "policy": { "label": "Policy (observe-only)" },
+    "processMonitor": { "label": "Process monitor" },
+    "networkMonitor": { "label": "Network monitor" },
+    "anomaly": { "label": "Anomaly detection" },
+    "alerts": { "label": "Alerts (UI only)" }
+  }
+}
